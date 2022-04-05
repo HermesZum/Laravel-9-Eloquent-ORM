@@ -25,7 +25,10 @@ return new class extends Migration
             $table->string('linkedin')->nullable();
             $table->string('youtube')->nullable();
             $table->string('github')->nullable();
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

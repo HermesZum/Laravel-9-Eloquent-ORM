@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -74,5 +75,15 @@ class User extends Authenticatable
     public function groups(): BelongsToMany
     {
         return $this->belongsToMany(Group::class)->withTimestamps();
+    }
+
+    /**
+     * This function returns a has one through relationship
+     *
+     * @return HasOneThrough HasOneThrough object.
+     */
+    public function location(): HasOneThrough
+    {
+        return $this->hasOneThrough(Location::class, Profile::class);
     }
 }
