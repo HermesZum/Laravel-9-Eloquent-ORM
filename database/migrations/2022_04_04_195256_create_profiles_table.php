@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('name')->nullable();
             $table->text('bio')->nullable();
             $table->string('avatar')->nullable();
@@ -25,10 +29,6 @@ return new class extends Migration
             $table->string('linkedin')->nullable();
             $table->string('youtube')->nullable();
             $table->string('github')->nullable();
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
             $table->timestamps();
         });
     }
