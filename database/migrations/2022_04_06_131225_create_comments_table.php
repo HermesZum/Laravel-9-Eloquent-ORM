@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
+            $table->string('title')->nullable();
+            $table->text('body');
+            $table->morphs('commentable');
             $table->timestamps();
         });
     }

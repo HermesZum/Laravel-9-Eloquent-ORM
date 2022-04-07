@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('taggables', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tag_id')
+                ->constrained('tags')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->morphs('taggable');
             $table->timestamps();
         });
     }
