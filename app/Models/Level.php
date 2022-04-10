@@ -19,4 +19,24 @@ class Level extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    /**
+     * Get all the posts that belong to the users that belong to this role.
+     *
+     * @return HasManyTrough A collection of posts that belong to the user.
+     */
+    public function postsWithUser()
+    {
+        return $this->hasManyTrough(Post::class, User::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get all the videos that belong to the users that belong to this role.
+     *
+     * @return HasManyTrough A collection of posts that belong to the user.
+     */
+    public function videosWithUser()
+    {
+        return $this->hasManyTrough(Video::class, User::class, 'user_id', 'id');
+    }
 }
